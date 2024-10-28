@@ -15,15 +15,17 @@ document.querySelector('.calculator-keys').addEventListener('click', function(ev
     const value = target.value;
 
     // Se verifica que el elemento clicado sea un botón
-    if (target.tagName !== 'BUTTON') return;   
-
-    // TESTING
-    console.log(calculatorScreen);
+    if (target.tagName !== 'BUTTON') return;
 
     // Se reinicia el valor de currentInput y se actualiza la pantalla de la calculadora /*Aquí se debe reiniciar todo el proceso de la operación*/
     if (value === 'all-clear') {
         currentInput = '0';
         shouldResetInput = false;
+
+        // TESTING
+        if(value === '0'){
+            
+        }
         
         //calculatorScreen.value = currentInput;
         calculatorScreen.textContent = `${currentInput}`;
@@ -33,10 +35,10 @@ document.querySelector('.calculator-keys').addEventListener('click', function(ev
 
     // Se reinicia el valor de currentInput y se actualiza la pantalla de la calculadora
     if (value === 'clear-entry') {
-        currentInput = '0';
+        currentInput = '';
         shouldResetInput = false;
         //calculatorScreen.value = currentInput;
-        calculatorScreen.textContent = `${currentInput}`;
+        calculatorScreen.textContent += `${currentInput}`;
         return;
     }
 
@@ -64,12 +66,17 @@ document.querySelector('.calculator-keys').addEventListener('click', function(ev
         if (previousInput === '' || currentInput === '') return; // Evitar operaciones si falta una entrada
 
         screenProcess.textContent += ` ${currentInput}`;
-        currentInput = calcular(previousInput, currentInput, operator);
+        currentInput = calcular(previousInput, currentInput, operator);  
+        
+        // TESTING
+        console.log("En pantalla: " + calculatorScreen.textContent);
+        
         calculatorScreen.textContent += `${currentInput}`;
         //calculatorScreen.value = currentInput;
         previousInput = '';
         operator = '';
         shouldResetInput = true;
+        
         return;
     }
 
@@ -96,6 +103,10 @@ document.querySelector('.calculator-keys').addEventListener('click', function(ev
     // Se actualiza el valor de la pantalla de la calculadora para que muestre el valor de currentInput
     calculatorScreen.textContent += `${currentInput}`;
     //calculatorScreen.value = currentInput;
+
+    // TESTING
+    console.log("En pantalla: " + calculatorScreen.textContent);
+    console.log("Valor introducido: " + value);
 });
 
 // Función para calculo de operaciones aritméticas
