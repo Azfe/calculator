@@ -6,8 +6,6 @@ let oper = '';
 let shouldResetInput = false;
 calculatorScreen.textContent = '0';
 
-let count = 0;
-
 // Se  añade un "event listener" para manejar los clics en los botones de la calculadora
 document.querySelector('.calculator-keys').addEventListener('click', function(event){
     // Se obtiene el elemento que se clicó y su valor
@@ -18,14 +16,13 @@ document.querySelector('.calculator-keys').addEventListener('click', function(ev
     if (target.tagName !== 'BUTTON') return;   
 
     // TESTING
-    console.log(calculatorScreen);
+    console.log("1: " + calculatorScreen.textContent);
 
     // Se reinicia el valor de currentInput y se actualiza la pantalla de la calculadora /*Aquí se debe reiniciar todo el proceso de la operación*/
     if (value === 'all-clear') {
         currentInput = '0';
         shouldResetInput = false;
         
-        //calculatorScreen.value = currentInput;
         calculatorScreen.textContent = `${currentInput}`;
         screenProcess.textContent = ''; // Se limpia el historial
         return;
@@ -35,7 +32,6 @@ document.querySelector('.calculator-keys').addEventListener('click', function(ev
     if (value === 'clear-entry') {
         currentInput = '0';
         shouldResetInput = false;
-        //calculatorScreen.value = currentInput;
         calculatorScreen.textContent = `${currentInput}`;
         return;
     }
@@ -45,12 +41,9 @@ document.querySelector('.calculator-keys').addEventListener('click', function(ev
         if (previousInput !== '' && currentInput !== '') { // se opera si hay entradas previas y actuales            
             screenProcess.textContent += `${currentInput}`;
             currentInput = calcular(previousInput, currentInput, operator);
-            calculatorScreen.textContent += `${currentInput}`;
-            //calculatorScreen.value = currentInput;
-            
-            /*countOper ++;
-            console.log("se cuenta: "+ countOper);*/
+            calculatorScreen.textContent = `${currentInput}`;
         }
+
         operator = value;
         previousInput = currentInput;
         shouldResetInput = true;        
@@ -63,10 +56,13 @@ document.querySelector('.calculator-keys').addEventListener('click', function(ev
     if (value === '=') {
         if (previousInput === '' || currentInput === '') return; // Evitar operaciones si falta una entrada
 
-        screenProcess.textContent += ` ${currentInput}`;
+        screenProcess.textContent += ` ${currentInput} =`;
         currentInput = calcular(previousInput, currentInput, operator);
-        calculatorScreen.textContent += `${currentInput}`;
-        //calculatorScreen.value = currentInput;
+        calculatorScreen.textContent = `${currentInput}`;
+        
+        // TESTING
+        console.log("= " + calculatorScreen.textContent);
+
         previousInput = '';
         operator = '';
         shouldResetInput = true;
@@ -76,8 +72,7 @@ document.querySelector('.calculator-keys').addEventListener('click', function(ev
     // Botón conmuta el  número a negativo o positivo
     if (value === '+/-') { // Maneja el botón +/-
         currentInput = (parseFloat(currentInput) * -1).toString(); // conmuta el  número a negativo o positivo
-        calculatorScreen.textContent += `${currentInput}`;
-        //calculatorScreen.value = currentInput;
+        calculatorScreen.textContent = `${currentInput}`;
         return;
     }    
 
@@ -94,8 +89,7 @@ document.querySelector('.calculator-keys').addEventListener('click', function(ev
     }
 
     // Se actualiza el valor de la pantalla de la calculadora para que muestre el valor de currentInput
-    calculatorScreen.textContent += `${currentInput}`;
-    //calculatorScreen.value = currentInput;
+    calculatorScreen.textContent = `${currentInput}`;
 });
 
 // Función para calculo de operaciones aritméticas

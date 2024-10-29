@@ -21,13 +21,6 @@ document.querySelector('.calculator-keys').addEventListener('click', function(ev
     if (value === 'all-clear') {
         currentInput = '0';
         shouldResetInput = false;
-
-        // TESTING
-        if(value === '0'){
-            
-        }
-        
-        //calculatorScreen.value = currentInput;
         calculatorScreen.textContent = `${currentInput}`;
         screenProcess.textContent = ''; // Se limpia el historial
         return;
@@ -37,7 +30,6 @@ document.querySelector('.calculator-keys').addEventListener('click', function(ev
     if (value === 'clear-entry') {
         currentInput = '';
         shouldResetInput = false;
-        //calculatorScreen.value = currentInput;
         calculatorScreen.textContent += `${currentInput}`;
         return;
     }
@@ -48,7 +40,7 @@ document.querySelector('.calculator-keys').addEventListener('click', function(ev
             screenProcess.textContent += `${currentInput}`;
             currentInput = calcular(previousInput, currentInput, operator);
             calculatorScreen.textContent += `${currentInput}`;
-            //calculatorScreen.value = currentInput;
+
             
             /*countOper ++;
             console.log("se cuenta: "+ countOper);*/
@@ -101,7 +93,7 @@ document.querySelector('.calculator-keys').addEventListener('click', function(ev
     }
 
     // Se actualiza el valor de la pantalla de la calculadora para que muestre el valor de currentInput
-    calculatorScreen.textContent += `${currentInput}`;
+    calculatorScreen.textContent = `${currentInput}`;
     //calculatorScreen.value = currentInput;
 
     // TESTING
