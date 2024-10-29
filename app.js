@@ -47,8 +47,7 @@ document.querySelector('.calculator-keys').addEventListener('click', function(ev
         operator = value;
         previousInput = currentInput;
         shouldResetInput = true;        
-        screenProcess.textContent += `${currentInput} ${operator} `;     
-        console.log('valor de operación: ' + operator);
+        screenProcess.textContent = `${currentInput} ${operator} `;        
         return;
     }
 
